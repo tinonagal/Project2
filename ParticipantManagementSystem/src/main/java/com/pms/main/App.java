@@ -16,14 +16,15 @@ public class App {
 	Scanner sc = new Scanner(System.in);
 	String con ="";
 	int pid;
+	int bid;
 	String name;
 	String email;
 	String phone;
-	int bid;
 	String result;
 	System.out.println("Welcome to Zumba management Sytem");
 	do {
-		System.out.println("1: Add Participant 2: Update Participant name 3: Delete Participant 4: Find Participant 5: Show all Participants");
+		System.out.println("1: Add Participant 2: Update Participant name 3: Delete Participant 4: Find Participant");
+		System.out.println("5: Show Batch 1 Participants 6: Show Batch 2 Participants 7: Show all Prticipants");
 		System.out.println("Please enter your choice: ");
 		int choice = sc.nextInt();
 		
@@ -71,13 +72,31 @@ public class App {
 			break;
 			
 		case 5:
+			List<Participant> batch1Participant = ps.Batch1Participant();
+			for(Participant p :batch1Participant) {
+				System.out.println("PID: "+p.getPid()+ " Name: "+p.getName()+ " Email: "+p.getEmail()+ " Phone: "+p.getPhone()+ " Batch ID: "+p.getBid());
+			} 
+			break;
+			
+		case 6:
+			List<Participant> batch2Participant = ps.Batch2Participant();
+			for(Participant p :batch2Participant) {
+				System.out.println("PID: "+p.getPid()+ " Name: "+p.getName()+ " Email: "+p.getEmail()+ " Phone: "+p.getPhone()+ " Batch ID: "+p.getBid());
+			} 
+			break;
+			
+			
+		case 7:
 			List<Participant> listofParticipant = ps.findallParticipant();
 			for(Participant p :listofParticipant) {
 				System.out.println("PID: "+p.getPid()+ " Name: "+p.getName()+ " Email: "+p.getEmail()+ " Phone: "+p.getPhone()+ " Batch ID: "+p.getBid());
 			} 
-			break;
+			break;	
+			
 			default: System.out.println("Wrong choice");			
 			break;
+			
+
 			
 		}
 		System.out.println("Do you want to continue?(y/n)");
@@ -85,7 +104,12 @@ public class App {
 	}while (con.equals("y"));
 	System.out.println("Thank you");
 	DBresource.close();
-	
+	sc.close();
+	}
+
+	private static int nextInt() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

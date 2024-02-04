@@ -41,10 +41,24 @@ public class ParticipantService {
 		}
 		
 	}
+
+	public List<Participant> Batch1Participant () {
+		List<Participant> batch1Participant = pd.Batch1Participant();
+		
+		return batch1Participant;
+		
+	}
+	public List<Participant> Batch2Participant () {
+		List<Participant> batch2Participant = pd.Batch2Participant();
+		
+		return batch2Participant;
+		
+	}
 	public List<Participant> findallParticipant () {
 		List<Participant> listofParticipant = pd.findallParticipant();
 		
 		return listofParticipant;
 		
 	}
+	
 }
