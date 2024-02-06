@@ -3,6 +3,7 @@ package com;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,11 +31,18 @@ public class LoginServlet extends HttpServlet {
 		String emailid = request.getParameter("emailid");
 		String password = request.getParameter("password");
 		//pw.println("Welcome user "+emailid);
+		
+		RequestDispatcher rd1 = request.getRequestDispatcher("HomeServlet");
+		RequestDispatcher rd2 = request.getRequestDispatcher("login.html");
+		
 		if(emailid.equals("tino@gmail.com") && password.equals("1234")) {
 			pw.println("Login successful using get");
+			rd1.forward(request,response);
 		} else {
 			pw.println("Login failed using get");
+			rd2.include(request,response);
 		}
+		response.setContentType("text/html");
 	}
 
 	/**
@@ -45,10 +53,17 @@ public class LoginServlet extends HttpServlet {
 		String emailid = request.getParameter("emailid");
 		String password = request.getParameter("password");
 		//pw.println("Welcome user "+emailid);
+		
+		RequestDispatcher rd1 = request.getRequestDispatcher("HomeServlet");
+		RequestDispatcher rd2 = request.getRequestDispatcher("login.html");
+		
 		if(emailid.equals("tino@gmail.com") && password.equals("1234")) {
 			pw.println("Login successful using post");
+			rd1.forward(request,response);
 		} else {
 			pw.println("Login failed using post");
+			rd2.include(request,response);
 		}
+		response.setContentType("text/html");
 	}
 }
