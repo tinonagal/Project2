@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,15 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class SignUpServlet
+ * Servlet implementation class LoginServlet
  */
-public class SignUpServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SignUpServlet() {
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,16 +46,19 @@ public class SignUpServlet extends HttpServlet {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/zumba_data","root","Shitball$447");
-			PreparedStatement pstmt = con.prepareStatement("insert into login values(?,?)");
+			PreparedStatement pstmt = con.prepareStatement("select * from login where emailid=? and password=?");
 			pstmt.setString(1, emailid);
 			pstmt.setString(2, password);
-			int res = pstmt.executeUpdate();
-			if(res>0) {
-				pw.println("account created successfully");
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				pw.print("successfully login");
+			}else {
+				pw.println("Invalid login details");
 				rd1.include(request, response);
 			}
+			
 		}catch (Exception e) {
-			pw.println("account creation not successfull"+e.getMessage());
+			pw.println("login exception"+e.getMessage());
 			rd1.include(request, response);
 		}
 		response.setContentType("text/html");
