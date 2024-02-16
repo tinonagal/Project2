@@ -27,4 +27,7 @@ if(email.equals("tinonagal@gmail.com")&& password.equals("12345")){
 	<jsp:include page="login.jsp"></jsp:include>
 	<%
 }
-response.setContentType("text/html"
+response.setContentType("text/html");
+%>
+</body>
+</html>

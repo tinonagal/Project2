@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LoginServlet
@@ -33,11 +34,24 @@ public class LoginServlet extends HttpServlet {
 		pw.println("In Servlet Page");
 		String name = request.getParameter("name");
 		pw.println("Name is "+name);
-		request.setAttribute("obj", name);
+		//request.setAttribute("obj", name);
+		HttpSession hs = request.getSession();
+		hs.setAttribute("obj", name);
 		RequestDispatcher rd = request.getRequestDispatcher("Home.jsp");
-		rd.include(request, response);
-		response.setContentType("text/html");
+		//rd.include(request, response);
+		//rd.forward(request, response);
+		response.sendRedirect("Home.jsp");
+		//response.setContentType("text/html");
+		//rd.forward(request, response);
 		
 	}
 
-	/*
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}

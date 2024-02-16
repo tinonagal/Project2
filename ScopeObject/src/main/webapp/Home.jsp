@@ -8,4 +8,11 @@
 </head>
 <body>
 <% 
-Object obj =
+//Object obj = request.getAttribute("obj");
+Object obj = session.getAttribute("obj");
+String name = (String)obj;
+out.println("<br/> In JSP Page");
+out.println("Name is "+name);
+%>
+</body>
+</html>

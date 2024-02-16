@@ -38,4 +38,36 @@ public class SessionDemo extends HttpServlet {
 		
 //		Cookie cc = new Cookie("name","This is my custom message");
 //		response.addCookie(cc);
-//		pw.pri
+//		pw.print("Welcome");
+		
+		//Cookie cc[]= request.getCookies();
+		
+		HttpSession hs = request.getSession();
+		if(hs.isNew()) {
+			pw.println("<br/> New Client");
+		}else {
+			pw.println("<br/>Old Client");
+		}
+		pw.println("<br/> Session ID "+hs.getId());
+		pw.println("<br/> Session Creation Time "+hs.getCreationTime());
+		pw.println("<br/> Session Creation time in date format "+new Date(hs.getCreationTime()));
+		pw.println("<br/> Last Access time in date format "+new Date(hs.getLastAccessedTime()));
+		hs.setMaxInactiveInterval(600);
+		pw.println("<br/> After set Last Access time in date format "+new Date(hs.getLastAccessedTime()));
+		pw.println("<br/> Count value is "+count);
+		count++;
+		if(count%5==0) {
+			hs.invalidate();  //destroy session
+		}
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
