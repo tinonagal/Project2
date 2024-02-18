@@ -17,6 +17,7 @@ import com.zms.bean.Participant;
 import com.zms.service.BatchService;
 import com.zms.service.ParticipantService;
 
+
 /**
  * Servlet implementation class BatchController
  */
@@ -71,6 +72,19 @@ public class BatchController extends HttpServlet {
 			pw.println(result);
 			response.setContentType("text/html");
 			RequestDispatcher rd = request.getRequestDispatcher("addBatch.jsp");
+			rd.include(request, response);
+    
+	}else if(operation.equals("update")) {
+			
+			int bid = Integer.parseInt(request.getParameter("bid"));
+			String btime = request.getParameter("btime");
+			Batch bat = new Batch();
+			bat.setBid(bid);
+			bat.setBtime(btime);
+			BatchService bs = new BatchService();
+			String result = bs.updateBatch(bat);
+			pw.println(result);
+			RequestDispatcher rd = request.getRequestDispatcher("updateBatch.jsp");
 			rd.include(request, response);
 			
 	}else if(operation.equals("bdelete")) {

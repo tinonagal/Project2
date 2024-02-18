@@ -25,6 +25,18 @@ public class BatchDao {
 			return 0;
 		}
 	}
+	public int updateBatch(Batch bat) {
+		try {
+			Connection con =DbResource.getDbConnection();
+			PreparedStatement pstmt = con.prepareStatement("update batch set btime = ? where bid = ?");
+			pstmt.setInt(2, bat.getBid());
+			pstmt.setString(1, bat.getBtime());
+			return pstmt.executeUpdate();
+		}catch (Exception e) {
+			System.err.println(e);
+			return 0;
+		}
+	}
 	public int deleteBatch(int bid) {
 		try {
 			Connection con =DbResource.getDbConnection();

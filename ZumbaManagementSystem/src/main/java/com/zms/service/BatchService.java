@@ -3,7 +3,6 @@ package com.zms.service;
 import java.util.List;
 
 import com.zms.bean.Batch;
-import com.zms.bean.Participant;
 import com.zms.dao.BatchDao;
 
 public class BatchService {
@@ -16,6 +15,13 @@ public class BatchService {
 			return "New Batch created";
 		}else {
 			return "New Batch was not added";
+		}
+	}
+	public String updateBatch(Batch bat) {
+		if(bd.updateBatch(bat)>0) {
+			return "Batch Time has been updated successfully";
+		}else {
+			return "Batch Time update unsuccessful";
 		}
 	}
 	public String deleteBatch(int bid) {
