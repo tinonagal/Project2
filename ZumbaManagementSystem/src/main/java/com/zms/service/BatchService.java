@@ -32,9 +32,11 @@ public class BatchService {
 		}
 	}
 	public List<Batch> showBatch() {
-		
 		return bd.showBatch();
 	
 }
+	public List<Object[]> showBatchParticipant(){
+		return bd.showBatchParticipant();
+	}
 	
 }

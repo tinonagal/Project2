@@ -8,7 +8,7 @@ public class DbResource {
 	static {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/zumba_data","root","Shitball$447");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/zumba_app","root","Shitball$447");
 		}catch (Exception e) {
 			System.out.println("Db Connection error "+e);
 		}

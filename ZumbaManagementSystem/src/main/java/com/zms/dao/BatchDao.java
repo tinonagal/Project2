@@ -66,4 +66,27 @@ public class BatchDao {
 		}
 		return listofBat;
 	}
+	public List<Object[]> showBatchParticipant() {
+		List<Object[]> listofBat = new ArrayList<>();
+		try {
+			Connection con =DbResource.getDbConnection();
+			PreparedStatement pstmt = con.prepareStatement("select p.pid,p.name,p.email,p.phone,p.age,b.btype,b.btime,p.bid from batch b,participant p where b.bid=p.bid");
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Object obj[] = new Object[8];
+				obj[0]=rs.getInt(1);
+				obj[1]=rs.getString(2);
+				obj[2]=rs.getString(3);
+				obj[3]=rs.getString(4);
+				obj[4]=rs.getInt(5);
+				obj[5]=rs.getString(6);
+				obj[6]=rs.getString(7);
+				obj[7]=rs.getInt(8);		
+				listofBat.add(obj);
+			}
+		}catch (Exception e) {
+			System.err.println(e);
+		}
+		return listofBat;
+	}
 }

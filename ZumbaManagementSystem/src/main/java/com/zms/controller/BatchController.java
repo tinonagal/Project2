@@ -13,9 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.zms.bean.Batch;
-import com.zms.bean.Participant;
 import com.zms.service.BatchService;
-import com.zms.service.ParticipantService;
+
 
 
 /**
@@ -25,9 +24,7 @@ import com.zms.service.ParticipantService;
 public class BatchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+	BatchService bs = new BatchService();
     public BatchController() {
         super();
         // TODO Auto-generated constructor stub
@@ -43,6 +40,12 @@ public class BatchController extends HttpServlet {
 		HttpSession hs = request.getSession();
 		hs.setAttribute("obj", listofBat);
 		response.sendRedirect("displayBatch.jsp");
+		
+		//PrintWriter pw = response.getWriter();
+		//List<Object[]> listofBP = bs.showBatchParticipant();
+		//HttpSession hs = request.getSession();
+		//hs.setAttribute("BPlist", listofBP);
+		//response.sendRedirect("showBatchParticipant.jsp");
 	}
 
 	/**
@@ -86,6 +89,15 @@ public class BatchController extends HttpServlet {
 			pw.println(result);
 			RequestDispatcher rd = request.getRequestDispatcher("updateBatch.jsp");
 			rd.include(request, response);
+			
+	}else if(operation.equals("bshow")) {
+			
+			BatchService bs = new BatchService();
+			List<Batch> listofBat = bs.showBatch();
+			HttpSession hs = request.getSession();
+			hs.setAttribute("obj", listofBat);
+			//RequestDispatcher rd = request.getRequestDispatcher("displayBatch.jsp");
+			response.sendRedirect("displayBatch.jsp");
 			
 	}else if(operation.equals("bdelete")) {
 		

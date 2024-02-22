@@ -5,17 +5,19 @@ private int pid;
 private String name;
 private String email;
 private String phone;
-private int bid;
+private int age;
+private Integer bid;
 public Participant() {
 	super();
 	// TODO Auto-generated constructor stub
 }
-public Participant(int pid, String name, String email, String phone, int bid) {
+public Participant(int pid, String name, String email, String phone, int age, Integer bid) {
 	super();
 	this.pid = pid;
 	this.name = name;
 	this.email = email;
 	this.phone = phone;
+	this.age = age;
 	this.bid = bid;
 }
 public int getPid() {
@@ -42,10 +44,16 @@ public String getPhone() {
 public void setPhone(String phone) {
 	this.phone = phone;
 }
-public int getBid() {
+public int getAge() {
+	return age;
+}
+public void setAge(int age) {
+	this.age = age;
+}
+public Integer getBid() {
 	return bid;
 }
-public void setBid(int bid) {
+public void setBid(Integer bid) {
 	this.bid = bid;
 }
 

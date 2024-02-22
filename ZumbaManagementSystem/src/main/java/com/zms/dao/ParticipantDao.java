@@ -14,11 +14,12 @@ public class ParticipantDao {
 	public int storeParticipant(Participant par) {
 		try {
 			Connection con =DbResource.getDbConnection();
-			PreparedStatement pstmt = con.prepareStatement("insert into participant values(?,?,?,?,?)");
-			pstmt.setInt(1, par.getPid());
-			pstmt.setString(2, par.getName());
-			pstmt.setString(3, par.getEmail());
-			pstmt.setString(4, par.getPhone());
+			PreparedStatement pstmt = con.prepareStatement("insert into participant(name,email,phone,age,bid) values(?,?,?,?,?)");
+			
+			pstmt.setString(1, par.getName());
+			pstmt.setString(2, par.getEmail());
+			pstmt.setString(3, par.getPhone());
+			pstmt.setInt(4, par.getAge());
 			pstmt.setInt(5, par.getBid());
 			return pstmt.executeUpdate();
 		}catch (Exception e) {
@@ -29,8 +30,8 @@ public class ParticipantDao {
 	public int updateParticipantBatch(Participant par) {
 		try {
 			Connection con =DbResource.getDbConnection();
-			PreparedStatement pstmt = con.prepareStatement("update participant set bid = ? where pid = ?");
-			pstmt.setInt(2, par.getPid());
+			PreparedStatement pstmt = con.prepareStatement("update participant set bid = ? where name = ?");
+			pstmt.setString(2, par.getName());
 			pstmt.setInt(1, par.getBid());
 			return pstmt.executeUpdate();
 		}catch (Exception e) {
@@ -61,7 +62,8 @@ public class ParticipantDao {
 				par.setName(rs.getString(2));
 				par.setEmail(rs.getString(3));
 				par.setPhone(rs.getString(4));
-				par.setBid(rs.getInt(5));
+				par.setAge(rs.getInt(5));
+				par.setBid(rs.getInt(6));
 				listofPar.add(par);
 			}
 		}catch (Exception e) {

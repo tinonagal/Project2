@@ -11,6 +11,8 @@
 </head>
 <body>
 <h2>Batch Details</h2>
+<form action="BatchController" method="post">
+<input type="hidden" name="operation" value="bshow">
 <table border="1">
 	<tr>
 		<th>BID</th>
@@ -20,8 +22,8 @@
 	</tr>
 	<%
 	Object obj = session.getAttribute("obj");
-	List<Batch> listofBat = (List<Batch>)obj;
-	Iterator<Batch> li = listofBat.iterator();
+	List<Batch> list = (List<Batch>)obj;
+	Iterator<Batch> li = list.iterator();
 	while(li.hasNext()){
 		Batch bat = li.next();
 		%>
@@ -34,8 +36,10 @@
 		<%
 	}
 	%>
+	
 
 </table>
+</form>
 <br/>
 <a href="index.html">Back</a>
 </body>
